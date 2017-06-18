@@ -1,7 +1,9 @@
 import random
 
 def retain(population,numToRetain,fitnessOfPopulation,quality,retained,parents):
-	#recursively call function until numeber of candidate solutions selected is equal to numToRetain
+	#recursively call function until number of candidate solutions selected is equal to numToRetain
+	#print (retained,numToRetain)
+	#print parents
 	if retained == numToRetain:
 		return parents
 	else:
@@ -15,16 +17,17 @@ def retain(population,numToRetain,fitnessOfPopulation,quality,retained,parents):
 				if individual not in parents:
 					parents.append(individual)
 					retained += 1
+		#print(parents)
 		retain(population,numToRetain,fitnessOfPopulation,quality,retained,parents)
 
 
 def reproduce(parents,numChildren):
-	childrenAdded = 
-	children[]
+	childrenAdded = 0
+	children = []
 	while childrenAdded < numChildren:
 		#pick any 2 candidate solutions from the parent list
 		parent1 = random.choice(parents)
-		parent2 - random.choice(parents)
+		parent2 = random.choice(parents)
 		if parent1 != parent2:
 			half = len(parent1)/2
 			#perform a crossover operation to obtain child
@@ -36,10 +39,10 @@ def reproduce(parents,numChildren):
 
 def mutate(parents,children,mutateProbability,timeSlots):
 	population = parents + children
-	#mutate some candidate solutions at roandom
+	#mutate some candidate solutions at random
 	for ind in population:
 		if mutateProbability > random.random():
-			posToMutate = random.choice(ind)
+			posToMutate = random.randint(0,len(ind) - 1)
 			ind[posToMutate] = random.choice(timeSlots)
 	return population
 

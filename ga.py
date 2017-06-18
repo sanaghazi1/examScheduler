@@ -1,6 +1,6 @@
 import random
-from evaluationFunctions.py import sameTime,twoInOneDay,consecutive
-from evolutionFunctions.py import retain,mutate,reproduce
+from evaluationFunctions import sameTime,twoInOneDay,consecutive
+from evolutionFunctions import retain,mutate,reproduce
 
 def generateIndividual(numExams,timeSlots):
 	individual = []
@@ -8,22 +8,35 @@ def generateIndividual(numExams,timeSlots):
 	for exam in range(numExams):
 		examTime = random.choice(timeSlots)
 		individual.append(examTime)
+	return individual
 
 
 def generatePopulation(popSize,numExams,timeSlots):
 	population = []
 	#generate candidate solutions (indiviuals) for optimal exam timetable
-	for ind in range(popSize)
+	for ind in range(popSize):
 		individual = generateIndividual(numExams,timeSlots)
 		population.append(individual)
 	return population
 
 
+def createTimeSlotDict(solution):
+	timeSlotDict = dict()
+	for i in range(len(solution)):
+		if solution[i] in timeSlotDict:
+			timeSlotDict[solution[i]].append(i)
+		else:
+			timeSlotDict[solution[i]] = [i]
+	return timeSlotDict
+
+
 def evaluateFitness(studentInfo,individual):
 	totalPenalty = 0
-	#determine total penalty for candidate solution based on various evaluate factors
-	for student in studentInfo:
-		totalPenalty += sameTime(student,individual) + twoInOneDay(student,individual) + consecutive(student,individual)
+	timeSlotDict = createTimeSlotDict(individual)
+	#determine total penalty for candidate solution based on various evaluation factors
+	for studentIdx in range(len(studentInfo)):
+		student = studentInfo[studentIdx]
+		totalPenalty += sameTime(student,timeSlotDict,individual) + twoInOneDay(student,timeSlotDict,individual) + consecutive(student,timeSlotDict,individual)
 	#fitness is inverse of the associated total penalty
 	fitness = 1.0 / 1 + totalPenalty
 	return fitness
@@ -52,9 +65,9 @@ def evolve(population,fitnessOfPopulation,quality,retainProportion,mutateProbabi
 	#select individuals from current generation with probability based on their fitness
 	retained = 0
 	parents = []
-	parents = retain(population,numToRetain,fitnessOfPopulation,quality,retained,parents)
-	numChildren = size - numToRetain
+	retain(population,numToRetain,fitnessOfPopulation,quality,retained,parents)
 	#produce new candidate solutions from those retained to reach full population size
+	numChildren = size - numToRetain
 	children =  reproduce(parents,numChildren)
 	#mutate some of the parents and chilren to prevent problems of local min/max
 	newPopulation = mutate(parents,children,mutateProbability,timeSlots)
