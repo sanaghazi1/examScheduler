@@ -9,7 +9,7 @@ Inputs:
 2. Courses: List of all courses for which exams need to be scheduled (datatype: list, example: ["English","Math","Science"])
 3. minEnrolment: Minmimum number of courses a student can be enrolled in at any given time (datatype: int, example: 3)
 4. maxEnrollment: Maxiumum number of courses a student can be enrolled in at any given time (datatype: int, example: 5)
-5. timeSlots: All available timeslots for exames to be schedule (datatype: list, example: ["11","12","21","22])
+5. timeSlots: All available timeslots for exams to be schedule (datatype: list, example: ["11","12","21","22])
   (11: (day 1, time 1), 12: (day 1, time 2), 21: (day 2, time 1), 22: (day 2, time 2))
 6. generation: Number of generations the algoirthm iterates through
 
