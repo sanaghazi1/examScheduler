@@ -2,7 +2,7 @@
 Solves variant of MESP using a genetic algorithm (https://www.macs.hw.ac.uk/~dwcorne/cfm.pdf)
 
 Goal:
-Create an 'optimal' exam schedule for all students. This entails the most efficient time allocation for all avaialbe courses among all available timeslots. In this example, an optimal schedule is one that minimizes events in which students are 1) scheduled to take multiple exams at the same time, 2) have 2 exams in the same day or 3) have to take consecutive exams 
+Create an 'optimal' exam schedule for all students. This entails the most efficient time allocation for all available courses among all available timeslots. In this example, an optimal schedule is one that minimizes events in which students are 1) scheduled to take multiple exams at the same time, 2) have 2 exams in the same day or 3) have to take consecutive exams 
 
 Inputs:
 1. Number of Students: Total number of students taking all possible exams offered (datatype: int, example : 10)
